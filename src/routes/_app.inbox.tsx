@@ -21,6 +21,7 @@ const CHANNELS = [
   { v: "facebook", l: "Facebook", Icon: Facebook },
   { v: "twitter", l: "X / Twitter", Icon: Twitter },
   { v: "linkedin", l: "LinkedIn", Icon: Linkedin },
+  { v: "tiktok", l: "TikTok", Icon: Music2 },
   { v: "web_form", l: "Web form", Icon: Globe },
 ] as const;
 
