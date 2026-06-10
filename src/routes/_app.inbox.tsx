@@ -4,7 +4,7 @@ import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth, canEdit } from "@/lib/auth-context";
 import { timeAgo } from "@/lib/format";
-import { Mail, MessageCircle, Phone, Send, Instagram, Facebook, Twitter, Linkedin, Globe, ArrowRight, Inbox as InboxIcon } from "lucide-react";
+import { Mail, MessageCircle, Phone, Send, Instagram, Facebook, Twitter, Linkedin, Globe, ArrowRight, Inbox as InboxIcon, Music2 } from "lucide-react";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/_app/inbox")({
@@ -21,6 +21,7 @@ const CHANNELS = [
   { v: "facebook", l: "Facebook", Icon: Facebook },
   { v: "twitter", l: "X / Twitter", Icon: Twitter },
   { v: "linkedin", l: "LinkedIn", Icon: Linkedin },
+  { v: "tiktok", l: "TikTok", Icon: Music2 },
   { v: "web_form", l: "Web form", Icon: Globe },
 ] as const;
 
@@ -72,9 +73,9 @@ function InboxPage() {
   return (
     <div className="space-y-5 max-w-7xl">
       <div>
-        <h1 className="text-2xl text-foreground" style={{ fontWeight: 500 }}>Unified Inbox</h1>
+        <h1 className="text-2xl text-foreground" style={{ fontWeight: 500 }}>Conversations</h1>
         <p className="text-sm text-muted-foreground mt-1">
-          Inbound messages from email, WhatsApp, social, and web forms in one place. Connect channels in Settings to auto-route messages here.
+          Inbound messages from email, WhatsApp, social, TikTok, and web forms in one place. Connect channels in Settings to auto-route messages here.
         </p>
       </div>
 
