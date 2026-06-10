@@ -27,7 +27,7 @@ const NAV = [
   { to: "/companies", label: "Companies", icon: Building2, bg: "#fde7d4", fg: "#a85a2c" }, // pumpkin
   { to: "/pipeline", label: "Pipeline", icon: KanbanSquare, bg: "#fde0e0", fg: "#b8413f" }, // coral red
   { to: "/tasks", label: "Tasks & Calendar", icon: CalendarCheck, bg: "#e6e2f0", fg: "#5a4f8a" }, // lavender
-  { to: "/inbox", label: "Conversations", icon: Inbox, bg: "#dce9f0", fg: "#3a6680" }, // sky
+  { to: "/inbox", label: "Inbox", icon: Inbox, bg: "#dce9f0", fg: "#3a6680" }, // sky
   { to: "/documents", label: "Documents", icon: FileText, bg: "#f0e6d2", fg: "#7a5e2a" }, // parchment
   { to: "/email-sync", label: "Email Sync", icon: Mail, bg: "#fff0c8", fg: "#9a6a14" }, // honey
   { to: "/ai-writer", label: "AI Writer", icon: Sparkles, bg: "#f5e3d0", fg: "#8a5a2a" }, // caramel
