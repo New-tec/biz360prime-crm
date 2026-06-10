@@ -4,7 +4,7 @@ import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth, canEdit } from "@/lib/auth-context";
 import { timeAgo } from "@/lib/format";
-import { Mail, MessageCircle, Phone, Send, Instagram, Facebook, Twitter, Linkedin, Globe, ArrowRight, Inbox as InboxIcon } from "lucide-react";
+import { Mail, MessageCircle, Phone, Send, Instagram, Facebook, Twitter, Linkedin, Globe, ArrowRight, Inbox as InboxIcon, Music2 } from "lucide-react";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/_app/inbox")({
