@@ -73,9 +73,9 @@ function InboxPage() {
   return (
     <div className="space-y-5 max-w-7xl">
       <div>
-        <h1 className="text-2xl text-foreground" style={{ fontWeight: 500 }}>Unified Inbox</h1>
+        <h1 className="text-2xl text-foreground" style={{ fontWeight: 500 }}>Conversations</h1>
         <p className="text-sm text-muted-foreground mt-1">
-          Inbound messages from email, WhatsApp, social, and web forms in one place. Connect channels in Settings to auto-route messages here.
+          Inbound messages from email, WhatsApp, social, TikTok, and web forms in one place. Connect channels in Settings to auto-route messages here.
         </p>
       </div>
 
