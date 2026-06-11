@@ -14,6 +14,7 @@ import {
   CalendarCheck,
   Inbox,
   FileText,
+  Trophy,
 } from "lucide-react";
 import { useAuth, isAdmin } from "@/lib/auth-context";
 import { initials } from "@/lib/format";
