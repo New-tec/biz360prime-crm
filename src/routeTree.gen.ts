@@ -16,7 +16,6 @@ import { Route as AppRouteImport } from './routes/_app'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppTasksRouteImport } from './routes/_app.tasks'
 import { Route as AppSettingsRouteImport } from './routes/_app.settings'
-import { Route as AppSalesScorecardRouteImport } from './routes/_app.sales-scorecard'
 import { Route as AppRolesRouteImport } from './routes/_app.roles'
 import { Route as AppReportsRouteImport } from './routes/_app.reports'
 import { Route as AppPipelineRouteImport } from './routes/_app.pipeline'
@@ -61,11 +60,6 @@ const AppTasksRoute = AppTasksRouteImport.update({
 const AppSettingsRoute = AppSettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
-  getParentRoute: () => AppRoute,
-} as any)
-const AppSalesScorecardRoute = AppSalesScorecardRouteImport.update({
-  id: '/sales-scorecard',
-  path: '/sales-scorecard',
   getParentRoute: () => AppRoute,
 } as any)
 const AppRolesRoute = AppRolesRouteImport.update({
@@ -140,7 +134,6 @@ export interface FileRoutesByFullPath {
   '/pipeline': typeof AppPipelineRoute
   '/reports': typeof AppReportsRoute
   '/roles': typeof AppRolesRoute
-  '/sales-scorecard': typeof AppSalesScorecardRoute
   '/settings': typeof AppSettingsRoute
   '/tasks': typeof AppTasksRoute
 }
@@ -160,7 +153,6 @@ export interface FileRoutesByTo {
   '/pipeline': typeof AppPipelineRoute
   '/reports': typeof AppReportsRoute
   '/roles': typeof AppRolesRoute
-  '/sales-scorecard': typeof AppSalesScorecardRoute
   '/settings': typeof AppSettingsRoute
   '/tasks': typeof AppTasksRoute
 }
@@ -182,7 +174,6 @@ export interface FileRoutesById {
   '/_app/pipeline': typeof AppPipelineRoute
   '/_app/reports': typeof AppReportsRoute
   '/_app/roles': typeof AppRolesRoute
-  '/_app/sales-scorecard': typeof AppSalesScorecardRoute
   '/_app/settings': typeof AppSettingsRoute
   '/_app/tasks': typeof AppTasksRoute
 }
@@ -204,7 +195,6 @@ export interface FileRouteTypes {
     | '/pipeline'
     | '/reports'
     | '/roles'
-    | '/sales-scorecard'
     | '/settings'
     | '/tasks'
   fileRoutesByTo: FileRoutesByTo
@@ -224,7 +214,6 @@ export interface FileRouteTypes {
     | '/pipeline'
     | '/reports'
     | '/roles'
-    | '/sales-scorecard'
     | '/settings'
     | '/tasks'
   id:
@@ -245,7 +234,6 @@ export interface FileRouteTypes {
     | '/_app/pipeline'
     | '/_app/reports'
     | '/_app/roles'
-    | '/_app/sales-scorecard'
     | '/_app/settings'
     | '/_app/tasks'
   fileRoutesById: FileRoutesById
@@ -307,13 +295,6 @@ declare module '@tanstack/react-router' {
       path: '/settings'
       fullPath: '/settings'
       preLoaderRoute: typeof AppSettingsRouteImport
-      parentRoute: typeof AppRoute
-    }
-    '/_app/sales-scorecard': {
-      id: '/_app/sales-scorecard'
-      path: '/sales-scorecard'
-      fullPath: '/sales-scorecard'
-      preLoaderRoute: typeof AppSalesScorecardRouteImport
       parentRoute: typeof AppRoute
     }
     '/_app/roles': {
@@ -408,7 +389,6 @@ interface AppRouteChildren {
   AppPipelineRoute: typeof AppPipelineRoute
   AppReportsRoute: typeof AppReportsRoute
   AppRolesRoute: typeof AppRolesRoute
-  AppSalesScorecardRoute: typeof AppSalesScorecardRoute
   AppSettingsRoute: typeof AppSettingsRoute
   AppTasksRoute: typeof AppTasksRoute
 }
@@ -425,7 +405,6 @@ const AppRouteChildren: AppRouteChildren = {
   AppPipelineRoute: AppPipelineRoute,
   AppReportsRoute: AppReportsRoute,
   AppRolesRoute: AppRolesRoute,
-  AppSalesScorecardRoute: AppSalesScorecardRoute,
   AppSettingsRoute: AppSettingsRoute,
   AppTasksRoute: AppTasksRoute,
 }
@@ -442,3 +421,12 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}
