@@ -62,6 +62,162 @@ export type Database = {
           },
         ]
       }
+      ad_campaigns: {
+        Row: {
+          adset_id: string | null
+          clicks: number
+          connector_id: string | null
+          created_at: string
+          creative_id: string | null
+          currency: string
+          external_campaign_id: string | null
+          id: string
+          impressions: number
+          name: string
+          platform: Database["public"]["Enums"]["ad_platform"]
+          spend: number
+          stat_date: string
+          updated_at: string
+        }
+        Insert: {
+          adset_id?: string | null
+          clicks?: number
+          connector_id?: string | null
+          created_at?: string
+          creative_id?: string | null
+          currency?: string
+          external_campaign_id?: string | null
+          id?: string
+          impressions?: number
+          name: string
+          platform: Database["public"]["Enums"]["ad_platform"]
+          spend?: number
+          stat_date?: string
+          updated_at?: string
+        }
+        Update: {
+          adset_id?: string | null
+          clicks?: number
+          connector_id?: string | null
+          created_at?: string
+          creative_id?: string | null
+          currency?: string
+          external_campaign_id?: string | null
+          id?: string
+          impressions?: number
+          name?: string
+          platform?: Database["public"]["Enums"]["ad_platform"]
+          spend?: number
+          stat_date?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ad_campaigns_connector_id_fkey"
+            columns: ["connector_id"]
+            isOneToOne: false
+            referencedRelation: "ad_connectors"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      ad_connectors: {
+        Row: {
+          account_ref: string | null
+          config: Json
+          created_at: string
+          display_name: string
+          id: string
+          last_synced_at: string | null
+          platform: Database["public"]["Enums"]["ad_platform"]
+          status: Database["public"]["Enums"]["connector_status"]
+          updated_at: string
+        }
+        Insert: {
+          account_ref?: string | null
+          config?: Json
+          created_at?: string
+          display_name: string
+          id?: string
+          last_synced_at?: string | null
+          platform: Database["public"]["Enums"]["ad_platform"]
+          status?: Database["public"]["Enums"]["connector_status"]
+          updated_at?: string
+        }
+        Update: {
+          account_ref?: string | null
+          config?: Json
+          created_at?: string
+          display_name?: string
+          id?: string
+          last_synced_at?: string | null
+          platform?: Database["public"]["Enums"]["ad_platform"]
+          status?: Database["public"]["Enums"]["connector_status"]
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      attribution_touchpoints: {
+        Row: {
+          campaign_id: string | null
+          contact_id: string | null
+          created_at: string
+          deal_id: string | null
+          id: string
+          metadata: Json
+          occurred_at: string
+          platform: Database["public"]["Enums"]["ad_platform"] | null
+          type: Database["public"]["Enums"]["touchpoint_type"]
+          value: number | null
+        }
+        Insert: {
+          campaign_id?: string | null
+          contact_id?: string | null
+          created_at?: string
+          deal_id?: string | null
+          id?: string
+          metadata?: Json
+          occurred_at?: string
+          platform?: Database["public"]["Enums"]["ad_platform"] | null
+          type: Database["public"]["Enums"]["touchpoint_type"]
+          value?: number | null
+        }
+        Update: {
+          campaign_id?: string | null
+          contact_id?: string | null
+          created_at?: string
+          deal_id?: string | null
+          id?: string
+          metadata?: Json
+          occurred_at?: string
+          platform?: Database["public"]["Enums"]["ad_platform"] | null
+          type?: Database["public"]["Enums"]["touchpoint_type"]
+          value?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "attribution_touchpoints_campaign_id_fkey"
+            columns: ["campaign_id"]
+            isOneToOne: false
+            referencedRelation: "ad_campaigns"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "attribution_touchpoints_contact_id_fkey"
+            columns: ["contact_id"]
+            isOneToOne: false
+            referencedRelation: "contacts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "attribution_touchpoints_deal_id_fkey"
+            columns: ["deal_id"]
+            isOneToOne: false
+            referencedRelation: "deals"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       audit_log: {
         Row: {
           action: string
@@ -528,6 +684,114 @@ export type Database = {
         }
         Relationships: []
       }
+      nurture_drafts: {
+        Row: {
+          assignee_id: string | null
+          body: string
+          channel: Database["public"]["Enums"]["message_channel"]
+          contact_id: string | null
+          created_at: string
+          id: string
+          intent_score: number | null
+          latency_ms: number | null
+          model: string | null
+          prompt_log: string | null
+          status: Database["public"]["Enums"]["draft_status"]
+          subject: string | null
+          template_id: string | null
+          updated_at: string
+        }
+        Insert: {
+          assignee_id?: string | null
+          body: string
+          channel?: Database["public"]["Enums"]["message_channel"]
+          contact_id?: string | null
+          created_at?: string
+          id?: string
+          intent_score?: number | null
+          latency_ms?: number | null
+          model?: string | null
+          prompt_log?: string | null
+          status?: Database["public"]["Enums"]["draft_status"]
+          subject?: string | null
+          template_id?: string | null
+          updated_at?: string
+        }
+        Update: {
+          assignee_id?: string | null
+          body?: string
+          channel?: Database["public"]["Enums"]["message_channel"]
+          contact_id?: string | null
+          created_at?: string
+          id?: string
+          intent_score?: number | null
+          latency_ms?: number | null
+          model?: string | null
+          prompt_log?: string | null
+          status?: Database["public"]["Enums"]["draft_status"]
+          subject?: string | null
+          template_id?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "nurture_drafts_contact_id_fkey"
+            columns: ["contact_id"]
+            isOneToOne: false
+            referencedRelation: "contacts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "nurture_drafts_template_id_fkey"
+            columns: ["template_id"]
+            isOneToOne: false
+            referencedRelation: "nurture_templates"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      nurture_templates: {
+        Row: {
+          body: string
+          channel: Database["public"]["Enums"]["message_channel"]
+          created_at: string
+          id: string
+          is_approved: boolean
+          is_fallback: boolean
+          name: string
+          stage: string | null
+          subject: string | null
+          tone: string | null
+          updated_at: string
+        }
+        Insert: {
+          body: string
+          channel?: Database["public"]["Enums"]["message_channel"]
+          created_at?: string
+          id?: string
+          is_approved?: boolean
+          is_fallback?: boolean
+          name: string
+          stage?: string | null
+          subject?: string | null
+          tone?: string | null
+          updated_at?: string
+        }
+        Update: {
+          body?: string
+          channel?: Database["public"]["Enums"]["message_channel"]
+          created_at?: string
+          id?: string
+          is_approved?: boolean
+          is_fallback?: boolean
+          name?: string
+          stage?: string | null
+          subject?: string | null
+          tone?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       pipeline_stages: {
         Row: {
           created_at: string
@@ -578,6 +842,78 @@ export type Database = {
           display_name?: string
           email?: string
           id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      revenue_targets: {
+        Row: {
+          created_at: string
+          id: string
+          key: string
+          label: string
+          target_value: number
+          unit: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          key: string
+          label: string
+          target_value: number
+          unit?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          key?: string
+          label?: string
+          target_value?: number
+          unit?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      routing_rules: {
+        Row: {
+          assignee_id: string | null
+          created_at: string
+          id: string
+          is_active: boolean
+          min_intent_score: number
+          name: string
+          platform: Database["public"]["Enums"]["ad_platform"] | null
+          priority: number
+          region: string | null
+          tier: string | null
+          updated_at: string
+        }
+        Insert: {
+          assignee_id?: string | null
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          min_intent_score?: number
+          name: string
+          platform?: Database["public"]["Enums"]["ad_platform"] | null
+          priority?: number
+          region?: string | null
+          tier?: string | null
+          updated_at?: string
+        }
+        Update: {
+          assignee_id?: string | null
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          min_intent_score?: number
+          name?: string
+          platform?: Database["public"]["Enums"]["ad_platform"] | null
+          priority?: number
+          region?: string | null
+          tier?: string | null
           updated_at?: string
         }
         Relationships: []
@@ -737,6 +1073,42 @@ export type Database = {
         }
         Relationships: []
       }
+      warehouse_events: {
+        Row: {
+          actor_id: string | null
+          created_at: string
+          entity_id: string | null
+          entity_type: string | null
+          event_type: string
+          id: string
+          occurred_at: string
+          payload: Json
+          source: string
+        }
+        Insert: {
+          actor_id?: string | null
+          created_at?: string
+          entity_id?: string | null
+          entity_type?: string | null
+          event_type: string
+          id?: string
+          occurred_at?: string
+          payload?: Json
+          source: string
+        }
+        Update: {
+          actor_id?: string | null
+          created_at?: string
+          entity_id?: string | null
+          entity_type?: string | null
+          event_type?: string
+          id?: string
+          occurred_at?: string
+          payload?: Json
+          source?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -755,7 +1127,17 @@ export type Database = {
       }
     }
     Enums: {
+      ad_platform:
+        | "google_ads"
+        | "meta"
+        | "linkedin"
+        | "tiktok"
+        | "web_form"
+        | "seo"
+        | "other"
       app_role: "admin" | "sales_manager" | "sales_rep" | "viewer"
+      connector_status: "connected" | "disconnected" | "error" | "pending"
+      draft_status: "pending" | "approved" | "rejected" | "sent"
       lead_status: "new" | "contacted" | "qualified" | "converted" | "lost"
       lead_temperature: "hot" | "warm" | "cold"
       message_channel:
@@ -779,6 +1161,16 @@ export type Database = {
       task_priority: "low" | "medium" | "high" | "urgent"
       task_status: "pending" | "in_progress" | "completed" | "cancelled"
       task_type: "task" | "meeting" | "call" | "follow_up"
+      touchpoint_type:
+        | "impression"
+        | "click"
+        | "pixel_event"
+        | "contact_created"
+        | "deal_created"
+        | "deal_won"
+        | "deal_lost"
+        | "message_sent"
+        | "message_reply"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -906,7 +1298,18 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
+      ad_platform: [
+        "google_ads",
+        "meta",
+        "linkedin",
+        "tiktok",
+        "web_form",
+        "seo",
+        "other",
+      ],
       app_role: ["admin", "sales_manager", "sales_rep", "viewer"],
+      connector_status: ["connected", "disconnected", "error", "pending"],
+      draft_status: ["pending", "approved", "rejected", "sent"],
       lead_status: ["new", "contacted", "qualified", "converted", "lost"],
       lead_temperature: ["hot", "warm", "cold"],
       message_channel: [
@@ -932,6 +1335,17 @@ export const Constants = {
       task_priority: ["low", "medium", "high", "urgent"],
       task_status: ["pending", "in_progress", "completed", "cancelled"],
       task_type: ["task", "meeting", "call", "follow_up"],
+      touchpoint_type: [
+        "impression",
+        "click",
+        "pixel_event",
+        "contact_created",
+        "deal_created",
+        "deal_won",
+        "deal_lost",
+        "message_sent",
+        "message_reply",
+      ],
     },
   },
 } as const
