@@ -17,6 +17,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppTasksRouteImport } from './routes/_app.tasks'
 import { Route as AppSettingsRouteImport } from './routes/_app.settings'
 import { Route as AppRolesRouteImport } from './routes/_app.roles'
+import { Route as AppRevenueEngineRouteImport } from './routes/_app.revenue-engine'
 import { Route as AppReportsRouteImport } from './routes/_app.reports'
 import { Route as AppPipelineRouteImport } from './routes/_app.pipeline'
 import { Route as AppInboxRouteImport } from './routes/_app.inbox'
@@ -65,6 +66,11 @@ const AppSettingsRoute = AppSettingsRouteImport.update({
 const AppRolesRoute = AppRolesRouteImport.update({
   id: '/roles',
   path: '/roles',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppRevenueEngineRoute = AppRevenueEngineRouteImport.update({
+  id: '/revenue-engine',
+  path: '/revenue-engine',
   getParentRoute: () => AppRoute,
 } as any)
 const AppReportsRoute = AppReportsRouteImport.update({
@@ -133,6 +139,7 @@ export interface FileRoutesByFullPath {
   '/inbox': typeof AppInboxRoute
   '/pipeline': typeof AppPipelineRoute
   '/reports': typeof AppReportsRoute
+  '/revenue-engine': typeof AppRevenueEngineRoute
   '/roles': typeof AppRolesRoute
   '/settings': typeof AppSettingsRoute
   '/tasks': typeof AppTasksRoute
@@ -152,6 +159,7 @@ export interface FileRoutesByTo {
   '/inbox': typeof AppInboxRoute
   '/pipeline': typeof AppPipelineRoute
   '/reports': typeof AppReportsRoute
+  '/revenue-engine': typeof AppRevenueEngineRoute
   '/roles': typeof AppRolesRoute
   '/settings': typeof AppSettingsRoute
   '/tasks': typeof AppTasksRoute
@@ -173,6 +181,7 @@ export interface FileRoutesById {
   '/_app/inbox': typeof AppInboxRoute
   '/_app/pipeline': typeof AppPipelineRoute
   '/_app/reports': typeof AppReportsRoute
+  '/_app/revenue-engine': typeof AppRevenueEngineRoute
   '/_app/roles': typeof AppRolesRoute
   '/_app/settings': typeof AppSettingsRoute
   '/_app/tasks': typeof AppTasksRoute
@@ -194,6 +203,7 @@ export interface FileRouteTypes {
     | '/inbox'
     | '/pipeline'
     | '/reports'
+    | '/revenue-engine'
     | '/roles'
     | '/settings'
     | '/tasks'
@@ -213,6 +223,7 @@ export interface FileRouteTypes {
     | '/inbox'
     | '/pipeline'
     | '/reports'
+    | '/revenue-engine'
     | '/roles'
     | '/settings'
     | '/tasks'
@@ -233,6 +244,7 @@ export interface FileRouteTypes {
     | '/_app/inbox'
     | '/_app/pipeline'
     | '/_app/reports'
+    | '/_app/revenue-engine'
     | '/_app/roles'
     | '/_app/settings'
     | '/_app/tasks'
@@ -302,6 +314,13 @@ declare module '@tanstack/react-router' {
       path: '/roles'
       fullPath: '/roles'
       preLoaderRoute: typeof AppRolesRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/revenue-engine': {
+      id: '/_app/revenue-engine'
+      path: '/revenue-engine'
+      fullPath: '/revenue-engine'
+      preLoaderRoute: typeof AppRevenueEngineRouteImport
       parentRoute: typeof AppRoute
     }
     '/_app/reports': {
@@ -388,6 +407,7 @@ interface AppRouteChildren {
   AppInboxRoute: typeof AppInboxRoute
   AppPipelineRoute: typeof AppPipelineRoute
   AppReportsRoute: typeof AppReportsRoute
+  AppRevenueEngineRoute: typeof AppRevenueEngineRoute
   AppRolesRoute: typeof AppRolesRoute
   AppSettingsRoute: typeof AppSettingsRoute
   AppTasksRoute: typeof AppTasksRoute
@@ -404,6 +424,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppInboxRoute: AppInboxRoute,
   AppPipelineRoute: AppPipelineRoute,
   AppReportsRoute: AppReportsRoute,
+  AppRevenueEngineRoute: AppRevenueEngineRoute,
   AppRolesRoute: AppRolesRoute,
   AppSettingsRoute: AppSettingsRoute,
   AppTasksRoute: AppTasksRoute,
