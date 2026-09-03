@@ -14,6 +14,7 @@ import {
   CalendarCheck,
   Inbox,
   FileText,
+  Gauge,
 } from "lucide-react";
 import { useAuth, isAdmin } from "@/lib/auth-context";
 import { initials } from "@/lib/format";
@@ -33,6 +34,7 @@ const NAV = [
   { to: "/ai-writer", label: "AI Writer", icon: Sparkles, bg: "#f5e3d0", fg: "#8a5a2a" }, // caramel
   { to: "/analytics", label: "Analytics", icon: BarChart3, bg: "#dceadf", fg: "#3f6a52" }, // mint
   { to: "/reports", label: "Reports", icon: BarChart3, bg: "#e0ecdc", fg: "#4f7a4a" }, // sage
+  { to: "/revenue-engine", label: "Revenue Engine", icon: Gauge, bg: "#ffe4d1", fg: "#c95c47" }, // peach
 ] as const;
 
 const ADMIN_NAV = [

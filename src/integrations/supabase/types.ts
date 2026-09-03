@@ -64,13 +64,13 @@ export type Database = {
       }
       ad_campaigns: {
         Row: {
-          adset_id: string | null
+          adset_id: string
           clicks: number
           connector_id: string | null
           created_at: string
-          creative_id: string | null
+          creative_id: string
           currency: string
-          external_campaign_id: string | null
+          external_campaign_id: string
           id: string
           impressions: number
           name: string
@@ -80,13 +80,13 @@ export type Database = {
           updated_at: string
         }
         Insert: {
-          adset_id?: string | null
+          adset_id?: string
           clicks?: number
           connector_id?: string | null
           created_at?: string
-          creative_id?: string | null
+          creative_id?: string
           currency?: string
-          external_campaign_id?: string | null
+          external_campaign_id?: string
           id?: string
           impressions?: number
           name: string
@@ -96,13 +96,13 @@ export type Database = {
           updated_at?: string
         }
         Update: {
-          adset_id?: string | null
+          adset_id?: string
           clicks?: number
           connector_id?: string | null
           created_at?: string
-          creative_id?: string | null
+          creative_id?: string
           currency?: string
-          external_campaign_id?: string | null
+          external_campaign_id?: string
           id?: string
           impressions?: number
           name?: string
@@ -694,6 +694,7 @@ export type Database = {
           id: string
           intent_score: number | null
           latency_ms: number | null
+          lead_id: string | null
           model: string | null
           prompt_log: string | null
           status: Database["public"]["Enums"]["draft_status"]
@@ -710,6 +711,7 @@ export type Database = {
           id?: string
           intent_score?: number | null
           latency_ms?: number | null
+          lead_id?: string | null
           model?: string | null
           prompt_log?: string | null
           status?: Database["public"]["Enums"]["draft_status"]
@@ -726,6 +728,7 @@ export type Database = {
           id?: string
           intent_score?: number | null
           latency_ms?: number | null
+          lead_id?: string | null
           model?: string | null
           prompt_log?: string | null
           status?: Database["public"]["Enums"]["draft_status"]
@@ -739,6 +742,13 @@ export type Database = {
             columns: ["contact_id"]
             isOneToOne: false
             referencedRelation: "contacts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "nurture_drafts_lead_id_fkey"
+            columns: ["lead_id"]
+            isOneToOne: false
+            referencedRelation: "leads"
             referencedColumns: ["id"]
           },
           {
