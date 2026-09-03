@@ -64,13 +64,13 @@ export type Database = {
       }
       ad_campaigns: {
         Row: {
-          adset_id: string | null
+          adset_id: string
           clicks: number
           connector_id: string | null
           created_at: string
-          creative_id: string | null
+          creative_id: string
           currency: string
-          external_campaign_id: string | null
+          external_campaign_id: string
           id: string
           impressions: number
           name: string
@@ -80,13 +80,13 @@ export type Database = {
           updated_at: string
         }
         Insert: {
-          adset_id?: string | null
+          adset_id?: string
           clicks?: number
           connector_id?: string | null
           created_at?: string
-          creative_id?: string | null
+          creative_id?: string
           currency?: string
-          external_campaign_id?: string | null
+          external_campaign_id?: string
           id?: string
           impressions?: number
           name: string
@@ -96,13 +96,13 @@ export type Database = {
           updated_at?: string
         }
         Update: {
-          adset_id?: string | null
+          adset_id?: string
           clicks?: number
           connector_id?: string | null
           created_at?: string
-          creative_id?: string | null
+          creative_id?: string
           currency?: string
-          external_campaign_id?: string | null
+          external_campaign_id?: string
           id?: string
           impressions?: number
           name?: string
