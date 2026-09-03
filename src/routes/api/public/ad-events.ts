@@ -78,9 +78,9 @@ export const Route = createFileRoute("/api/public/ad-events")({
         const rows = parsed.data.events.map((e) => ({
           connector_id: e.connector_id ?? connectorByPlatform.get(e.platform) ?? null,
           platform: e.platform,
-          external_campaign_id: e.campaign_id ?? null,
-          adset_id: e.adset_id ?? null,
-          creative_id: e.creative_id ?? null,
+          external_campaign_id: e.campaign_id ?? "",
+          adset_id: e.adset_id ?? "",
+          creative_id: e.creative_id ?? "",
           name: e.name,
           stat_date: e.date,
           spend: e.spend,
