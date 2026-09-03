@@ -57,7 +57,7 @@ function RevenueEnginePage() {
   const q = useQuery({
     queryKey: ["uroe"],
     queryFn: async () => {
-      const [connectors, campaigns, touchpoints, rules, templates, drafts, events, targets, deals, stages, contacts, profiles] =
+      const [connectors, campaigns, touchpoints, rules, templates, drafts, events, targets, deals, stages, contacts, profiles, leads] =
         await Promise.all([
           supabase.from("ad_connectors").select("*").order("platform"),
           supabase.from("ad_campaigns").select("*").order("stat_date", { ascending: false }),
@@ -71,14 +71,19 @@ function RevenueEnginePage() {
           supabase.from("pipeline_stages").select("id, name, is_won, is_lost"),
           supabase.from("contacts").select("id, first_name, last_name, email, temperature").order("first_name"),
           supabase.from("profiles").select("id, display_name"),
+          supabase.from("leads").select("id, first_name, last_name, email, company_name, source, channel, status, owner_id, metadata, created_at").order("created_at", { ascending: false }).limit(50),
         ]);
       return {
         connectors: connectors.data ?? [], campaigns: campaigns.data ?? [], touchpoints: touchpoints.data ?? [],
         rules: rules.data ?? [], templates: templates.data ?? [], drafts: drafts.data ?? [],
         events: events.data ?? [], targets: targets.data ?? [], deals: deals.data ?? [],
         stages: stages.data ?? [], contacts: contacts.data ?? [], profiles: profiles.data ?? [],
+        leads: leads.data ?? [],
       };
     },
+    // Real-time ad spend lands via /api/public/ad-events; poll so CAC/ROAS stay current.
+    refetchInterval: 30_000,
+    refetchOnWindowFocus: true,
   });
 
   const d = q.data;
