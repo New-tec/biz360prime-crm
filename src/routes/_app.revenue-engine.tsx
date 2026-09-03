@@ -597,12 +597,55 @@ function Routing({ data, manage, refresh }: { data: any; manage: boolean; refres
 
   const repName = (id: string | null) => data.profiles.find((p: any) => p.id === id)?.display_name ?? "Round robin";
 
+  const routed = (data.leads ?? []).filter((l: any) => l?.metadata?.routed_at);
+
   return (
     <div className="space-y-4">
       <Note>
-        Rules are evaluated top-down by priority the moment a lead lands. The first rule whose region, tier,
-        source and minimum intent score all match wins, and the lead is assigned instantly — no queue, no delay.
+        Routing runs automatically in the database the instant a lead row is created — from the web form,
+        an ad connector or the API. Rules are evaluated top-down by priority; the first rule whose region,
+        tier, source and minimum intent score all match wins. If no rule matches, the lead goes to the
+        least-loaded rep. The owner is set, a notification fires and a pending nurture draft is written in
+        the same transaction — no manual simulation needed.
       </Note>
+
+      <Panel title="Recently auto-routed leads">
+        {routed.length ? (
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="text-left text-xs text-muted-foreground border-b border-border">
+                  <th className="py-2 pr-4">Lead</th>
+                  <th className="py-2 pr-4">Source</th>
+                  <th className="py-2 pr-4">Score</th>
+                  <th className="py-2 pr-4">Rule</th>
+                  <th className="py-2 pr-4">Assigned to</th>
+                  <th className="py-2 pr-4">Routed</th>
+                </tr>
+              </thead>
+              <tbody>
+                {routed.slice(0, 12).map((l: any) => (
+                  <tr key={l.id} className="border-b border-border/60">
+                    <td className="py-2 pr-4">
+                      {[l.first_name, l.last_name].filter(Boolean).join(" ") || l.company_name || l.email || "—"}
+                    </td>
+                    <td className="py-2 pr-4 text-muted-foreground">{l.source || l.channel || "—"}</td>
+                    <td className="py-2 pr-4">{l.metadata?.intent_score ?? "—"}</td>
+                    <td className="py-2 pr-4 text-muted-foreground">
+                      {l.metadata?.routed_rule_name ?? (l.metadata?.routing_mode === "balanced" ? "Least loaded" : "—")}
+                    </td>
+                    <td className="py-2 pr-4">{repName(l.owner_id)}</td>
+                    <td className="py-2 pr-4 text-muted-foreground">{timeAgo(l.created_at)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        ) : (
+          <Empty>No leads routed yet. New leads are assigned automatically the moment they are created.</Empty>
+        )}
+      </Panel>
+
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         <div className="lg:col-span-2 space-y-3">
